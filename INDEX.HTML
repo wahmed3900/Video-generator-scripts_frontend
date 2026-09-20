@@ -1,0 +1,134 @@
+Skip to contentvideo-generator-scripts-frontend – Build and Deployment – Vercel
+
+Find
+F
+
+Settings
+General
+Build and Deployment
+Environments
+Git
+Deployment Protection
+Passport
+Functions
+Sandboxes
+Cron Jobs
+Microfrontends
+Project Members
+Drains
+Alerts
+Tracing
+Security
+Networking
+Activity
+Advanced
+
+Avatar for wahmed3900
+wahmed3900
+
+
+Project Settings
+Build and Deployment
+Framework Settings
+When using a framework for a new project, it will be automatically detected. As a result, several project settings are automatically configured to achieve the best result. You can override them below.
+
+Framework Preset
+Framework logo
+Other
+`npm run vercel-build` or `npm run build`
+`public` if it exists, or `.`
+`yarn install`, `pnpm install`, `npm install`, or `bun install`
+None
+Learn more about Build and Development Settings
+Root Directory
+The directory within your project, where your code is located. Leave this field empty if your code is not located in a subdirectory.
+
+./
+Include files outside the root directory in the Build Step.
+
+
+Skip deployments when there are no changes to the root directory or its dependencies.
+
+
+Learn more about Root Directory
+
+Ignored Build Step
+Vercel skips builds for commits with a previously deployed SHA. Override with a shell command that exits 1 (build) or 0 (skip).
+
+Behavior
+
+Automatic
+Learn more about Ignored Build Step
+
+Node.js Version
+The Node.js version used during builds and for Serverless Functions. Redeploy to apply changes.
+
+
+24.x
+Learn more about Node.js Version
+
+Build Machine
+Choose your build settings and resources.
+
+Upgrade to the Pro Plan to set Elastic or Turbo as the build machine for this project.
+Custom Machine
+
+Basic
+2 vCPUs and 8 GB memory, cost-effective builds for smaller projects
+
+Your next deployment will build with a Basic machine.
+Learn more about build machine types and pricing
+On-Demand Concurrent Builds
+Skip the build queue and build deployments immediately. Usage costs apply per build minute.
+
+
+Run all builds immediately
+Skip the queue for all builds
+
+Run up to one build per branch
+New deployments within a branch are queued
+
+Disable on-demand concurrent builds
+Builds are queued, maximum of one at a time
+This feature is available on the Pro plan
+
+Deployment Checks
+No checks configured
+
+Use events or statuses from your checks provider to determine when a deployment is promoted to Production.
+
+Learn more about Deployment Checks
+
+Rolling Releases
+Roll out changes gradually by defining a traffic percentage for each stage.
+
+This feature is available on the Pro plan
+
+Prioritize Production Builds
+Run Production builds before Pre-Production builds.
+
+Enabled
+Learn more about Prioritize Production Builds
+
+OIDC Policies
+Configure policies that exchange OIDC tokens from external identity providers for VCR access tokens. Turborepo CLI policies are configured at the team level.
+
+
+0 VCR Policies
+
+Deployment Retention Policy
+Define a retention period for all Deployments for this Project. Deployments will be deleted after the defined time.
+
+Canceled Deployments
+
+
+Errored Deployments
+
+
+Pre-Production Deployments
+
+
+Production Deployments
+
+
+Learn more about Deployment Retention
