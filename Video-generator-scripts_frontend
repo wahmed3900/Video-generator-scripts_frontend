@@ -160,11 +160,14 @@
   .tab {
     padding: 7px 14px; border-radius: 6px; font-size: 13px; cursor: pointer;
     background: var(--bg); border: 1px solid var(--border); color: var(--ink-soft);
+    text-transform: capitalize;
   }
   .tab.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); font-weight: 600; }
-  .tab-content { display: none; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+  .tab-content { display: none; font-size: 14px; line-height: 1.6; }
   .tab-content.active { display: block; }
-  .tab-content strong { color: var(--gold); }
+  .tab-content strong { color: var(--gold); display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tab-content .field { margin-bottom: 14px; }
+  .tab-content .field-value { white-space: pre-wrap; word-break: break-word; }
 
   /* ---- history / contact sheet ---- */
   .history-item {
@@ -294,6 +297,10 @@ async function readError(res) {
   return data.detail || `Server responded with ${res.status}`;
 }
 
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 /* ---------- subscription status strip ---------- */
 async function refreshSubStatus() {
   const email = getEmail();
@@ -384,7 +391,11 @@ function updateFilmstrip(status) {
     if (status === 'failed') {
       if (i <= idx) frame.classList.add('failed');
     } else if (idx === -1) {
-      // pending or done — leave frames as-is (done handled separately)
+      // "pending" or "done" — nothing to highlight here; "done" is handled
+      // separately in pollJob, and "pending" gets frame 0 lit as a visual cue
+      if (status === 'pending') {
+        document.querySelector('.frame').classList.add('active');
+      }
     } else if (i < idx) {
       frame.classList.add('done');
     } else if (i === idx) {
@@ -408,6 +419,7 @@ async function pollJob(jobId) {
       document.getElementById('generateBtn').disabled = false;
       showSuccess('Video ready.');
       showVideo(jobId);
+      loadMarketing();        // auto-load marketing — no extra click needed
       loadHistory();
       refreshSubStatus();
       return;
@@ -458,8 +470,29 @@ async function loadMarketing() {
     renderMarketing(marketing);
     document.getElementById('marketingResult').style.display = 'block';
   } catch (e) {
-    showError('Marketing copy not available: ' + e.message);
+    // Non-fatal — marketing is optional and the pipeline continues without it.
+    // Don't show a scary error for a missing convenience feature.
+    console.warn('Marketing copy not available:', e.message);
   }
+}
+
+// Renders one platform's copy as labeled fields instead of raw JSON.
+// Handles strings, arrays (joins them), and nested objects (iterates entries).
+function renderPlatformContent(data) {
+  if (typeof data === 'string') {
+    return `<div class="field"><div class="field-value">${escapeHtml(data)}</div></div>`;
+  }
+  if (Array.isArray(data)) {
+    return `<div class="field"><div class="field-value">${escapeHtml(data.join(' '))}</div></div>`;
+  }
+  if (data && typeof data === 'object') {
+    return Object.entries(data).map(([key, value]) => {
+      const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const val = Array.isArray(value) ? value.join(' ') : String(value ?? '');
+      return `<div class="field"><strong>${escapeHtml(label)}</strong><div class="field-value">${escapeHtml(val)}</div></div>`;
+    }).join('');
+  }
+  return '';
 }
 
 function renderMarketing(marketing) {
@@ -484,7 +517,7 @@ function renderMarketing(marketing) {
     const content = document.createElement('div');
     content.className = 'tab-content' + (i === 0 ? ' active' : '');
     content.id = 'mkt-' + platform;
-    content.textContent = JSON.stringify(marketing[platform], null, 2);
+    content.innerHTML = renderPlatformContent(marketing[platform]);
     contentEl.appendChild(content);
   });
 }
@@ -511,7 +544,7 @@ async function loadHistory() {
     listEl.innerHTML = videos.map(v => {
       const statusClass = v.status === 'done' ? 'done' : v.status === 'failed' ? 'failed' : 'working';
       const date = v.created_at ? new Date(v.created_at).toLocaleString() : '';
-      const clickable = v.has_video ? `onclick="showVideo('${v.job_id}'); document.getElementById('videoResult').scrollIntoView({behavior:'smooth'});"` : '';
+      const clickable = v.has_video ? `onclick="showVideo('${v.job_id}'); loadMarketing(); document.getElementById('videoResult').scrollIntoView({behavior:'smooth'});"` : '';
       return `
         <div class="history-item" style="${v.has_video ? 'cursor:pointer;' : ''}" ${clickable}>
           <div>
@@ -525,10 +558,6 @@ async function loadHistory() {
   } catch (e) {
     listEl.innerHTML = `<div class="empty-state">Could not load history: ${escapeHtml(e.message)}</div>`;
   }
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 /* ---------- checkout ---------- */
