@@ -34,8 +34,6 @@
     -webkit-font-smoothing: antialiased;
     position: relative;
   }
-
-  /* ---- film sprocket rails (35mm stock reference, both edges) ---- */
   .sprockets {
     position: fixed; top: 0; bottom: 0; width: 28px; z-index: 0; pointer-events: none;
     background-image: repeating-linear-gradient(
@@ -43,7 +41,6 @@
     );
     opacity: 0.5;
   }
-  .sprockets::before, .sprockets::after { content: none; }
   .sprockets .hole {
     position: absolute; left: 50%; transform: translateX(-50%);
     width: 10px; height: 10px; background: var(--bg); border-radius: 2px;
@@ -51,10 +48,7 @@
   .sprockets.left { left: 0; }
   .sprockets.right { right: 0; }
   @media (max-width: 900px) { .sprockets { display: none; } }
-
   .wrap { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; padding-top: calc(48px + env(safe-area-inset-top, 0px)); }
-
-  /* ---- marquee hero ---- */
   .marquee {
     text-align: center; padding: 30px 20px 26px; margin-bottom: 34px;
     background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(232,179,76,0.16), transparent 70%);
@@ -81,8 +75,6 @@
     border-top: 1.5px dashed var(--border); border-bottom: 1.5px dashed var(--border);
     color: var(--ink-soft); font-size: 14px; max-width: 46ch;
   }
-
-  /* ---- panels ---- */
   .panel {
     background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
     padding: 26px; margin-bottom: 20px;
@@ -91,7 +83,6 @@
     font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.03em;
     margin: 0 0 18px; color: var(--gold);
   }
-
   label { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 7px; font-weight: 500; }
   input, textarea, select {
     width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
@@ -103,7 +94,6 @@
   textarea { min-height: 70px; margin-bottom: 16px; line-height: 1.5; }
   .row { display: flex; gap: 14px; }
   .row > div { flex: 1; }
-
   button {
     background: var(--gold); color: #1a1300; border: none; border-radius: 6px;
     padding: 13px 22px; font-size: 14.5px; font-weight: 700; font-family: 'Inter', sans-serif;
@@ -112,16 +102,10 @@
   button:hover:not(:disabled) { opacity: 0.92; box-shadow: 0 0 0 3px var(--gold-dim), 0 0 20px rgba(232,179,76,0.3); }
   button:active:not(:disabled) { transform: translateY(1px); }
   button:disabled { opacity: 0.4; cursor: not-allowed; }
-  button.ghost {
-    background: transparent; border: 1px solid var(--border); color: var(--ink); margin-left: 10px;
-  }
-  button.danger-ghost { background: transparent; border: 1px solid var(--red); color: var(--red); }
-
+  button.ghost { background: transparent; border: 1px solid var(--border); color: var(--ink); margin-left: 10px; }
   .error { color: var(--red); font-size: 13.5px; margin-top: 12px; display: none; }
   .success { color: var(--green); font-size: 13.5px; margin-top: 12px; display: none; }
   .hint { font-size: 12px; color: var(--ink-soft); margin: -10px 0 16px; }
-
-  /* ---- subscription strip ---- */
   .sub-strip {
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     padding: 14px 18px; background: var(--panel-raised); border: 1px solid var(--border);
@@ -132,8 +116,6 @@
   .sub-strip .meter { display: flex; align-items: center; gap: 8px; }
   .meter-bar { width: 90px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .meter-fill { height: 100%; background: var(--gold); }
-
-  /* ---- filmstrip pipeline progress ---- */
   .filmstrip { display: flex; gap: 4px; margin: 6px 0 14px; }
   .frame {
     flex: 1; height: 54px; border-radius: 4px; position: relative;
@@ -150,12 +132,9 @@
   .frame.done { background: var(--green-dim); border-color: var(--green); color: var(--green); font-weight: 600; }
   .frame.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); font-weight: 600; }
   .frame.failed { background: var(--red-dim); border-color: var(--red); color: var(--red); font-weight: 600; }
-
-  /* ---- results ---- */
   .result { display: none; }
   video { width: 100%; border-radius: 8px; background: #000; margin-bottom: 4px; }
   .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-
   .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
   .tab {
     padding: 7px 14px; border-radius: 6px; font-size: 13px; cursor: pointer;
@@ -168,8 +147,6 @@
   .tab-content strong { color: var(--gold); display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
   .tab-content .field { margin-bottom: 14px; }
   .tab-content .field-value { white-space: pre-wrap; word-break: break-word; }
-
-  /* ---- history / contact sheet ---- */
   .history-item {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px;
@@ -184,7 +161,6 @@
   .history-status.failed { background: var(--red-dim); color: var(--red); }
   .history-status.working { background: var(--gold-dim); color: var(--gold); }
   .empty-state { color: var(--ink-soft); font-size: 14px; padding: 10px 0; }
-
   footer { margin-top: 40px; font-size: 12px; color: var(--ink-soft); text-align: center; }
 </style>
 </head>
@@ -209,14 +185,11 @@
 
   <div class="panel">
     <div class="panel-title">New video</div>
-
     <label for="email">Your email</label>
     <input id="email" type="email" placeholder="you@example.com" onblur="onEmailBlur()" />
     <div class="hint">Used for your free-tier limit, subscription, and video history.</div>
-
     <label for="topic">Topic</label>
     <textarea id="topic" placeholder="e.g. Why most people fail at saving money"></textarea>
-
     <div class="row">
       <div>
         <label for="duration">Length (seconds)</label>
@@ -232,9 +205,7 @@
         </select>
       </div>
     </div>
-
     <button id="generateBtn" onclick="startGeneration()">Generate video</button>
-
     <div class="error" id="error"></div>
     <div class="success" id="success"></div>
   </div>
@@ -285,7 +256,6 @@
 <script>
 const API_URL = "https://video-generator-scripts-1.onrender.com";
 
-/* ---------- helpers ---------- */
 function showError(msg) { const e = document.getElementById('error'); e.textContent = msg; e.style.display = 'block'; }
 function clearError() { document.getElementById('error').style.display = 'none'; }
 function showSuccess(msg) { const e = document.getElementById('success'); e.textContent = msg; e.style.display = 'block'; }
@@ -301,21 +271,17 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------- subscription status strip ---------- */
 async function refreshSubStatus() {
   const email = getEmail();
   const strip = document.getElementById('subStrip');
   if (!email) { strip.style.display = 'none'; return; }
-
   try {
     const res = await fetch(`${API_URL}/subscription-status?email=${encodeURIComponent(email)}`);
     if (!res.ok) { strip.style.display = 'none'; return; }
     const data = await res.json();
     strip.style.display = 'flex';
-
     const statusText = document.getElementById('subStatusText');
     const meter = document.getElementById('subMeter');
-
     if (data.active) {
       statusText.innerHTML = '<span class="status-active">Pro — unlimited videos</span>';
       meter.style.display = 'none';
@@ -327,35 +293,25 @@ async function refreshSubStatus() {
       document.getElementById('meterText').textContent =
         `${data.videos_used_this_month} / ${data.free_videos_per_month} this month`;
     }
-  } catch (e) {
-    strip.style.display = 'none';
-  }
+  } catch (e) { strip.style.display = 'none'; }
 }
 
-function onEmailBlur() {
-  refreshSubStatus();
-  loadHistory();
-}
+function onEmailBlur() { refreshSubStatus(); loadHistory(); }
 
-/* ---------- generation flow ---------- */
 let _pollTimer = null;
 
 async function startGeneration() {
-  clearError();
-  clearSuccess();
+  clearError(); clearSuccess();
   const email = getEmail();
   const topic = document.getElementById('topic').value.trim();
   const duration_seconds = parseInt(document.getElementById('duration').value, 10) || 30;
   const tone = document.getElementById('tone').value;
-
   if (!email) { showError('Enter your email first.'); return; }
   if (!topic) { showError('Enter a topic first.'); return; }
-
   document.getElementById('generateBtn').disabled = true;
   document.getElementById('videoResult').style.display = 'none';
   document.getElementById('marketingResult').style.display = 'none';
   resetFilmstrip();
-
   try {
     const res = await fetch(`${API_URL}/generate-video`, {
       method: 'POST',
@@ -369,7 +325,6 @@ async function startGeneration() {
     }
     if (!res.ok) throw new Error(await readError(res));
     const data = await res.json();
-
     document.getElementById('progressPanel').style.display = 'block';
     pollJob(data.job_id);
   } catch (e) {
@@ -391,8 +346,6 @@ function updateFilmstrip(status) {
     if (status === 'failed') {
       if (i <= idx) frame.classList.add('failed');
     } else if (idx === -1) {
-      // "pending" or "done" — nothing to highlight here; "done" is handled
-      // separately in pollJob, and "pending" gets frame 0 lit as a visual cue
       if (status === 'pending') {
         document.querySelector('.frame').classList.add('active');
       }
@@ -410,16 +363,14 @@ async function pollJob(jobId) {
     const res = await fetch(`${API_URL}/jobs/${jobId}`);
     if (!res.ok) throw new Error(await readError(res));
     const job = await res.json();
-
     document.getElementById('statusHint').textContent = describeStatus(job.status);
     updateFilmstrip(job.status);
-
     if (job.status === 'done') {
       document.querySelectorAll('.frame').forEach(f => f.classList.add('done'));
       document.getElementById('generateBtn').disabled = false;
       showSuccess('Video ready.');
       showVideo(jobId);
-      loadMarketing();        // auto-load marketing — no extra click needed
+      loadMarketing();
       loadHistory();
       refreshSubStatus();
       return;
@@ -459,7 +410,6 @@ function showVideo(jobId) {
   document.getElementById('videoResult').dataset.jobId = jobId;
 }
 
-/* ---------- marketing copy ---------- */
 async function loadMarketing() {
   const jobId = document.getElementById('videoResult').dataset.jobId;
   if (!jobId) return;
@@ -470,14 +420,10 @@ async function loadMarketing() {
     renderMarketing(marketing);
     document.getElementById('marketingResult').style.display = 'block';
   } catch (e) {
-    // Non-fatal — marketing is optional and the pipeline continues without it.
-    // Don't show a scary error for a missing convenience feature.
     console.warn('Marketing copy not available:', e.message);
   }
 }
 
-// Renders one platform's copy as labeled fields instead of raw JSON.
-// Handles strings, arrays (joins them), and nested objects (iterates entries).
 function renderPlatformContent(data) {
   if (typeof data === 'string') {
     return `<div class="field"><div class="field-value">${escapeHtml(data)}</div></div>`;
@@ -500,7 +446,6 @@ function renderMarketing(marketing) {
   const contentEl = document.getElementById('marketingTabContents');
   tabsEl.innerHTML = '';
   contentEl.innerHTML = '';
-
   const platforms = Object.keys(marketing);
   platforms.forEach((platform, i) => {
     const tab = document.createElement('div');
@@ -513,7 +458,6 @@ function renderMarketing(marketing) {
       document.getElementById('mkt-' + platform).classList.add('active');
     };
     tabsEl.appendChild(tab);
-
     const content = document.createElement('div');
     content.className = 'tab-content' + (i === 0 ? ' active' : '');
     content.id = 'mkt-' + platform;
@@ -522,7 +466,6 @@ function renderMarketing(marketing) {
   });
 }
 
-/* ---------- history ---------- */
 async function loadHistory() {
   const email = getEmail();
   const listEl = document.getElementById('historyList');
@@ -530,17 +473,14 @@ async function loadHistory() {
     listEl.innerHTML = '<div class="empty-state">Enter your email above to see your video history.</div>';
     return;
   }
-
   try {
     const res = await fetch(`${API_URL}/videos?email=${encodeURIComponent(email)}`);
     if (!res.ok) throw new Error(await readError(res));
     const videos = await res.json();
-
     if (videos.length === 0) {
       listEl.innerHTML = '<div class="empty-state">No videos yet — generate your first one above.</div>';
       return;
     }
-
     listEl.innerHTML = videos.map(v => {
       const statusClass = v.status === 'done' ? 'done' : v.status === 'failed' ? 'failed' : 'working';
       const date = v.created_at ? new Date(v.created_at).toLocaleString() : '';
@@ -560,12 +500,10 @@ async function loadHistory() {
   }
 }
 
-/* ---------- checkout ---------- */
 async function startCheckout() {
   clearError();
   const email = getEmail();
   if (!email) { showError('Enter your email first.'); return; }
-
   try {
     const res = await fetch(`${API_URL}/create-checkout-session`, {
       method: 'POST',
@@ -584,13 +522,11 @@ async function startCheckout() {
   }
 }
 
-/* ---------- on load ---------- */
 if (new URLSearchParams(location.search).get('subscribed') === 'true') {
   showSuccess('Subscription active — unlimited videos unlocked.');
   history.replaceState({}, '', location.pathname);
 }
 
-/* ---------- decorative: film sprocket holes + marquee bulbs ---------- */
 function buildSprocketHoles() {
   ['sprocketsLeft', 'sprocketsRight'].forEach(id => {
     const rail = document.getElementById(id);
